@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE X3D PUBLIC 'ISO//Web3D//DTD X3D 3.0//EN' 'http://www.web3d.org/specifications/x3d-3.0.dtd'>
+
+
+<X3D profile='Immersive' >
+<head>
+ <meta name='Vizthumbnail' content='Thumb_template_x3d16607301540245441.jpg'/>
+ <meta name='ExportTime' content='17:57:21'/>
+ <meta name='ExportDate' content='10/22/2018'/>
+
+</head>
+<!-- The main body -->
+	<Scene>
+	<transform DEF="ast" >
+					<Viewpoint position="0.00000 0.00000 10.00000" orientation="0.00000 0.00000 0.00000 0.00000" 
+	zNear="0" zFar="50.08067" description="defaultX3DViewpointNode"></Viewpoint>
+	<Viewpoint position="0.00000 -5.00000 5.00000" orientation="1.00000 0.00000 0.00000 1.00000" 
+	zNear="0" zFar="50.08067" description="defaultX3DViewpointNode"></Viewpoint>
+					<transform DEF="box" >
+						<shape>
+							<appearance>
+								<material diffuseColor='1 0 1'></material>
+							</appearance>
+							<box></box>
+						</shape>
+	</transform></transform>
+
+					<timeSensor DEF="time" cycleInterval="1" loop="true"></timeSensor>
+					<PositionInterpolator DEF="move" key="0 0.5 1" keyValue="0 0 0  0 3 0  0 0 0"></PositionInterpolator>
+					<Route fromNode="time" fromField ="fraction_changed" toNode="move" toField="set_fraction"></Route>
+					<Route fromNode="move" fromField ="value_changed" toNode="ast" toField="translation"></Route>
+					<OrientationInterpolator DEF='turn'
+				key='0 0.5 1'
+				keyValue='0 1 0 0   0 1 0 1.046  0 1 0 2.093'></OrientationInterpolator>
+       			<ROUTE fromNode='time' fromField ='fraction_changed' toNode='turn2' toField='set_fraction'></ROUTE>
+       			<ROUTE fromNode='turn2' fromField ='value_changed' toNode='ast' toField='set_rotation'></ROUTE>
+
+	<transform DEF="box1">
+						<shape>
+							<appearance>
+								<material diffuseColor='1 0 0'></material>
+							</appearance>
+							<box size="10, 10, 0.2"></box>
+						</shape>
+	</transform>
+	<transform DEF="box2" translation = "5 0 5">
+						<shape>
+							<appearance>
+								<material diffuseColor='0 0 1'></material>
+							</appearance>
+							<box size="10, 0.1, 6"></box>
+						</shape>
+	</transform>
+				
+				
+					
+						
+</Scene>
+</X3D>
+
+
+

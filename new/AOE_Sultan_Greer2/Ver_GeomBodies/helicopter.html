@@ -1,0 +1,124 @@
+<html> 
+        <head> 
+            <title>My External 3d pg</title> 			
+            <script type='text/javascript' src='http://www.x3dom.org/download/x3dom.js'> </script> 
+            <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/download/x3dom.css'></link> 
+	<style  type="text/css">
+	#camfollow {
+ 	   position: absolute;
+ 	   float: left;
+ 	   z-index: 1;
+  	   top: 0px;
+  	   left: 0px;
+  	   width: 10em;
+ 	   height: 2em;
+ 	   border: none;
+ 	   background-color: #202021;
+   	 color: #ccc;
+	}
+	#camfull {
+ 	   position: absolute;
+ 	   float: left;
+ 	   z-index: 1;
+  	   top: 0px;
+  	   left: 10em;
+  	   width: 10em;
+ 	   height: 2em;
+ 	   border: none;
+ 	   background-color: #202021;
+   	 color: #ccc;
+	}
+	#caminFront {
+ 	   position: absolute;
+ 	   float: left;
+ 	   z-index: 1;
+  	   top: 0px;
+  	   left: 20em;
+  	   width: 10em;
+ 	   height: 2em;
+ 	   border: none;
+ 	   background-color: #202021;
+   	 color: #ccc;
+	}
+	#caminBack {
+ 	   position: absolute;
+ 	   float: left;
+ 	   z-index: 1;
+  	   top: 0px;
+  	   left: 30em;
+  	   width: 10em;
+ 	   height: 2em;
+ 	   border: none;
+ 	   background-color: #202021;
+   	 color: #ccc;
+	}
+
+
+        </style>
+        </head> 
+        	<body style='width:100%; height:100%; border:0; margin:0;  padding:0;'> 
+		<x3d style='width:100%; height:100%; border:0; margin:0;  padding:0;'> 
+	<button id="camfollow" onclick="document.getElementById('follow').setAttribute('set_bind','true');">follow</button>
+	<button id="caminFront" onclick="document.getElementById('inFront').setAttribute('set_bind','true');">inFront</button>
+	<button id="caminBack" onclick="document.getElementById('inBack').setAttribute('set_bind','true');">inBack</button>
+	<button id="camfull" onclick="document.getElementById('full').setAttribute('set_bind','true');">full</button>
+	<scene>	
+		
+	        <transform DEF="shk">
+		<Viewpoint id="inFront" position="-1.69051 21.35744 -34.13493" orientation="0 0 0 0" 
+	zNear="1" zFar="300" description="camera"></Viewpoint>
+		<Viewpoint id="inBack" position="-1.69051 21.35744 27.68655" orientation="0.00000 0.00000 0.00000 0.00000" 
+	zNear="1.00000" zFar="300.00000" description="camera"></Viewpoint>
+		<Viewpoint id="follow"position="-99.88659 150.75692 -276.40693" orientation="-0.02315 0.96933 0.24467 3.44686" 
+	zNear="128.02022" zFar="1500.00000" description="camera"></Viewpoint>
+		
+
+
+
+
+
+<inline nameSpaceName="ship" mapDEFToID="true" url="yfme7a7lvq-AdmiralSergeyGorshkov/ship.x3d"> </inline> 
+
+
+
+
+
+
+
+			<inline nameSpaceName="hawkBody" mapDEFToID="true" url="5xulumjp2ohs-SeaHawk/seahawk-body.x3d"> </inline>
+		<transform DEF="rotorT" translation="0 52.0962 118.783">
+			<inline nameSpaceName="hawkTail" mapDEFToID="true" url="5xulumjp2ohs-SeaHawk/seahawk-tailRotorNew.x3d"> </inline>
+		</Transform>
+		<timeSensor DEF="time1" cycleInterval="0.2" loop="true"></timeSensor>
+			<OrientationInterpolator DEF="turn1" key="0 0.5 1" keyValue="1 0 0 0   1 0 0 3.14  1 0 0 6.28"></OrientationInterpolator>
+       			<Route fromNode="time1" fromField ="fraction_changed" toNode="turn1" toField="set_fraction"></Route>
+       			<Route fromNode="turn1" fromField ="value_changed" toNode="rotorT" toField="rotation"></Route>
+
+		<transform DEF="rotorM" translation="0 43.1481 -7.21657">
+			<inline nameSpaceName="hawkRotor" mapDEFToID="true" url="5xulumjp2ohs-SeaHawk/seahawk-mainRotor.x3d"> </inline> 		  
+		</Transform>
+		<timeSensor DEF="time2" cycleInterval="0.1" loop="true"></timeSensor>
+        		<OrientationInterpolator DEF="turn2" key="0 0.5 1" keyValue="0 1 0 0   0 1 0 3.14  0 1 0 6.28"></OrientationInterpolator>
+       			<Route fromNode="time2" fromField ="fraction_changed" toNode="turn2" toField="set_fraction"></Route>
+       			<Route fromNode="turn2" fromField ="value_changed" toNode="rotorM" toField="rotation"></Route>
+		</Transform>
+
+		<Shape DEF="Floor">
+		<Appearance>
+			<material diffuseColor='1 1 1'></material>
+		</Appearance>
+		<Box size='180 0.05 220'/>
+		</Shape>
+
+		
+
+			<timeSensor DEF="time2" cycleInterval="20" loop="true"></timeSensor>
+        		<PositionInterpolator DEF="move" key="0 0.25 0.5 0.75 1" keyValue="0 0 0  0 140 -40  0 280 -100  0 240 -200  0 260 -400"></PositionInterpolator>
+       			<Route fromNode="time2" fromField ="fraction_changed" toNode="move" toField="set_fraction"></Route>
+       			<Route fromNode="move" fromField ="value_changed" toNode="shk" toField="translation"></Route>
+<Viewpoint id="full" bind = 'false' position="-307.33222 463.85592 -850.46098" orientation="-0.02315 0.96933 0.24467 3.44686" 
+	zNear="128.02022" zFar="1500.00000" description="camera"></Viewpoint>
+						</scene>
+		</x3d>   
+        </body>
+    </html> 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D profile='Immersive' >
+<head>
+ <meta name='Vizthumbnail' content='Thumb_template_x3d16607301540245441.jpg'/>
+ <meta name='ExportTime' content='17:57:21'/>
+ <meta name='ExportDate' content='10/22/2018'/>
+
+</head>
+<Scene>
+<DirectionalLight ambientIntensity='0' color='1,1,1' direction='1,-0.1,1' global='false' intensity='100' metadata='X3DMetadataObject' on='true' shadowCascades='1' shadowFilterSize='0' shadowIntensity='0' shadowMapSize='1024' shadowOffset='0' shadowSplitFactor='1' shadowSplitOffset='0.1' zFar='-1' zNear='-1' ></DirectionalLight>
+<Transform>
+			<Inline nameSpaceName="hawkBody" mapDEFToID="true" url="5xulumjp2ohs-SeaHawk/seahawk-body.x3d"> </Inline>
+			<Viewpoint id="inFront" position="-1.69051 21.35744 -34.13493" orientation="0 0 0 0" zNear="1" zFar="300" description="Cockpit view"></Viewpoint>
+			<Viewpoint id="inBack" position="-1.69051 21.35744 27.68655" orientation="0.00000 0.00000 0.00000 0.00000" 
+	zNear="1.00000" zFar="300.00000" description="In-bay view"></Viewpoint>
+			<Viewpoint id="follow" position="-99.88659 150.75692 -276.40693" orientation="-0.02315 0.96933 0.24467 3.44686" zNear="128.02022" zFar="1500.00000" description="Front view"></Viewpoint>
+			<Viewpoint id="full" bind = 'false' position="-307.33222 463.85592 -850.46098" orientation="-0.02315 0.96933 0.24467 3.44686" 	zNear="128.02022" zFar="1500.00000" description="Full Scene"></Viewpoint>
+		<Transform DEF="rotorT" translation="0 52.0962 118.783">
+			<Inline nameSpaceName="hawkTail" mapDEFToID="true" url="5xulumjp2ohs-SeaHawk/seahawk-tailRotorNew.x3d"> </Inline>
+		</Transform>
+		<TimeSensor DEF="time1" cycleInterval="0.1" loop="true"  startTime="-1"></TimeSensor>
+			<OrientationInterpolator DEF="turn1" key="0 0.5 1" keyValue="1 0 0 0   1 0 0 1.046  1 0 0 2.093"></OrientationInterpolator>
+       			<ROUTE fromNode="time1" fromField ="fraction_changed" toNode="turn1" toField="set_fraction"></ROUTE>
+       			<ROUTE fromNode="turn1" fromField ="value_changed" toNode="rotorT" toField="rotation"></ROUTE>
+
+		<Transform DEF="rotorM" translation="0 43.1481 -7.21657">
+			<Inline nameSpaceName="hawkRotor" mapDEFToID="true" url="5xulumjp2ohs-SeaHawk/seahawk-mainRotor.x3d"> </Inline> 		  
+		</Transform>
+		<TimeSensor DEF="time2" cycleInterval="0.1" loop="true"  startTime="-1"></TimeSensor>
+        		<OrientationInterpolator DEF="turn2" key="0 0.5 1" keyValue="0 1 0 0   0 1 0 1.046  0 1 0 2.093"></OrientationInterpolator>
+       			<ROUTE fromNode="time2" fromField ="fraction_changed" toNode="turn2" toField="set_fraction"></ROUTE>
+       			<ROUTE fromNode="turn2" fromField ="value_changed" toNode="rotorM" toField="set_rotation"></ROUTE>
+</Transform>
+
+
+
+		<ProximitySensor DEF="PS" size="5000 5000 5000"/>
+		<ROUTE fromNode="PS" fromField="enterTime" toNode="time1" toField="set_startTime"></ROUTE>
+		<ROUTE fromNode="PS" fromField="enterTime" toNode="time2" toField="set_startTime"></ROUTE>
+
+		
+<Viewpoint id="full" bind = 'false' position="-307.33222 463.85592 -850.46098" orientation="-0.02315 0.96933 0.24467 3.44686" 
+	zNear="128.02022" zFar="1500.00000" description="camera"></Viewpoint>
+					
+</Scene>
+</X3D>
