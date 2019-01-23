@@ -4,7 +4,6 @@
 See it rendered @ http://metagrid2.sv.vt.edu/~keren9/Chopper/pages/directional_tablePage.html
 
 ## Credits
-.
 
 The original [SH-60 SeaHawk 3d model](https://free3d.com/3d-model/sh-60-seahawk-32184.html) is a free .obj model available at http://free3d.com. It is a product by *pleitosmovies*.
 
