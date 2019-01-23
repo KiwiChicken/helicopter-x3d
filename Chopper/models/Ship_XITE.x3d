@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.3//EN" "http://www.web3d.org/specifications/x3d-3.3.dtd">
+<X3D profile='Full' version='3.3' xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='http://www.web3d.org/specifications/x3d-3.3.xsd'>
+  <head>
+    <meta name='comment' content='World of Titania'/>
+    <meta name='created' content='Tue, 28 Nov 2018'/>
+    <meta name='creator' content='Keren Chen'/>
+  </head>
+  <Scene>
+        <LayerSet
+        activeLayer='2'
+        order='0, 1, 2, 3'>
+      <Layer DEF='Background'
+          isPickable='false'>
+        <Background
+            skyAngle='1.09223, 1.5708'
+            skyColor='0.2 0.2 0.2, 0.2 0.2 0.2, 0.3 0.3 0.3'
+            groundAngle='1.1248, 1.5708'
+            groundColor='0.4 0.4 0.4, 0.4 0.4 0.4, 0.3 0.3 0.3'/>
+      </Layer>
+      <Layer DEF='Model'
+          isPickable='false'>
+            position='0 0 12.1899'/>
+        <Transform>
+<Viewpoint position="-50 36 -76" orientation="0.07620 0.97912 0.18848 3.97203" 
+		zNear="0" zFar="290" description="full view"></Viewpoint>
+          <Inline DEF='ship'
+              url='"shipScaled.x3d"'/>
+        </Transform>
+      </Layer>
+    </LayerSet>
+  </Scene>
+</X3D>

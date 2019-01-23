@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D version="3.0" profile="Immersive" xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
+	<head>
+		<meta name="filename" content="shipScaled.x3d" />
+		<meta name="generator" content="Blender 2.79 (sub 0)" />
+	</head>
+	<Scene>
+<Transform>
+        <Transform>
+	<Viewpoint id='inFront'
+			containerField='children'
+			position='0 21.35744 -34.13493'
+			description='Cockpit view'/>
+	<Viewpoint id='inBack'
+			containerField='children'
+			position='0 21.35744 25.68655'
+			description='Backseat view'/>
+	<Viewpoint id='follow'
+			containerField='children'
+			position='-99.88659 150.75692 -276.40693'
+			orientation='-0.02315 0.96933 0.24467 3.44686'
+			description='Front view'/>
+	<Viewpoint DEF='tail'
+			containerField='children'
+			description='Tail view'
+			position='8.07723 12.35744 85.87243'/>
+	<Inline DEF='body'
+              url='"seahawk-body.x3d"'/>
+		<Transform  DEF='rotorM' translation='0 43.1481 -7.21657'>
+          <Inline DEF='mainRotor'
+              url='"seahawk-mainRotornew.x3d"'/>
+		</Transform>
+		<Transform DEF='rotorT' translation='0 52.0962 118.783'>
+	<Inline DEF='tailRotor'
+              url='"seahawk-tailRotor.x3d"'/>
+		</Transform>
+
+		<TimeSensor DEF='time' cycleInterval='0.1' loop='true'></TimeSensor>
+		<OrientationInterpolator DEF='turn1'
+		key='0 0.5 1'
+		keyValue='1 0 0 0   1 0 0 1.046  1 0 0 2.093'/>
+		<!-- Route clock to rotation instruction -->
+		<ROUTE fromNode='time' fromField ='fraction_changed' toNode='turn1' toField='set_fraction'></ROUTE>
+		<!-- Route rotation instruction to object -->
+		<ROUTE fromNode='turn1' fromField ='value_changed' toNode='rotorT' toField='set_rotation'></ROUTE>
+		<OrientationInterpolator DEF='turn2'
+				key='0 0.5 1'
+				keyValue='0 1 0 0   0 1 0 1.046  0 1 0 2.093'></OrientationInterpolator>
+       			<ROUTE fromNode='time' fromField ='fraction_changed' toNode='turn2' toField='set_fraction'></ROUTE>
+       			<ROUTE fromNode='turn2' fromField ='value_changed' toNode='rotorM' toField='set_rotation'></ROUTE>
+        </Transform>
+	<!-- Non-following viewpoint -->
+		<Viewpoint id='full'
+		position='-307.33222 463.85592 -850.46098'
+		orientation='-0.02315 0.96933 0.24467 3.44686'
+		description='Full Scene'></Viewpoint>
+</Transform>
+	</Scene>
+</X3D>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=765"/>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.js"></script>
+	<script type="text/javascript" src="https://cdn.rawgit.com/kayahr/jquery-fullscreen-plugin/1.1.4/jquery.fullscreen-min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/noelboss/featherlight/1.7.8/release/featherlight.min.css"/>
+	<script type="text/javascript" src="https://cdn.rawgit.com/noelboss/featherlight/1.7.8/release/featherlight.min.js"></script>
+
+	<!-- X_ICTE requirements -->
+	<link rel="stylesheet" type="text/css" href="http://code.create3000.de/x_ite/latest/dist/x_ite.css"/>
+	<script type="text/javascript" src="http://code.create3000.de/x_ite/latest/dist/x_ite.min.js"></script>
+
+	<style>
+.browser {
+	width: auto;
+	width: 100%;
+	height: 97vh;
+}
+
+	</style>
+
+	<script type="text/javascript">
+X3D (function ()
+{
+	var Browser = X3D .getBrowser ("#browser");
+
+	$(".version") .text (Browser .name + " X3D Browser - Version " + Browser .version);
+
+	$(function ()
+	{
+		$(".meta-data-button") .click (function ()
+		{
+			var
+				Browser = X3D .getBrowser ("#browser"),
+				currentScene = Browser .currentScene,
+				metadata     = currentScene .getMetadata (),
+				names        = [ ],
+				tbody        = $(".meta-data-table tbody");
+	
+			for (var name in metadata)
+				names .push (name);
+	
+			names .sort ();
+	
+			tbody .empty ();
+
+			for (var i = 0; i < names .length; ++ i)
+			{
+				var
+					name = names [i],
+					tr   = $("<tr>") .appendTo (tbody);
+	
+				$("<td>") .text (name) .appendTo (tr);
+				$("<td>") .text (metadata [name]) .appendTo (tr);
+			}
+	
+			$.featherlight ($(".meta-data"));
+		});
+
+		var scrollId;
+
+		$(".console-button") .click (function ()
+		{
+			var clicked = false;
+		
+			function updateScroll ()
+			{
+				if (clicked)
+					return;
+
+				var element = $(".x_ite-console");
+	
+				element .scrollTop ($(".x_ite-console") .prop ("scrollHeight"));
+			}
+
+			var hidden = ($(".x_ite-console") .css ("display") == "none");
+
+			if (hidden)
+				scrollId = setInterval (updateScroll, 200);
+			else
+				clearInterval (scrollId);
+
+			$(".x_ite-console") .click (function () { clicked = true; });
+
+			$(".x_ite-console") .css ("display", hidden ? "block" : "none");
+		});
+
+		$(".clock-button") .click (function ()
+		{
+			Browser .getBrowserTimings () .setEnabled (! Browser .getBrowserTimings () .getEnabled ());
+		});
+
+		$(".fullscreen-button") .click (function () { $("#browser") .fullScreen (true); });	
+	});
+},
+function (error)
+{
+	console .error ("Please forgive me, your browser may not support all features required by X_ITE!");
+	console .error (error);
+});
+	</script>
+</head>
+<body>
+	<div class="page">
+		<header>
+		</header>
+		<div class="main">
+			<div>
+				<X3DCanvas id="browser" class="browser" src="../../models/Output_E_XITE.x3d">
+					<p class="fallback">Sorry!<br/>
+						<br/>
+						Your browser may not support all features required by <a href="http://create3000.de/x_ite/" target="_blank">X_ITE!</a>
+						Please use the latest release of Microsoft Edge, Firefox, Chrome, or Safari.
+						Make sure to regulary update your browser to make your Internet experience more secure and pleasant.
+					</p>
+				</X3DCanvas>
+			</div>
+		</div>
+	</page>
+
+</body>
+</html>
